@@ -856,6 +856,8 @@ const ICONS = {
   cavolo: [{c:[12,12.5,8]}, {d:'M12 4.5C9 8.5 9 16.5 12 20.5M12 4.5C15 8.5 15 16.5 12 20.5M4.6 9.5C8 10.5 8 14.5 4.6 15.5'}],
   broccolo: [{c:[7.8,10,3.6]}, {c:[12,7,3.6]}, {c:[16.2,10,3.6]}, {d:'M9 12.5 10.5 21H13.5L15 12.5'}],
   radice: [{c:[12,14,6.2]}, {d:'M12 20.2V23'}, {d:'M12 7.8C10 5 8 4 6.5 4.5M12 7.8C14 5 16 4 17.5 4.5M12 7.8V3'}],
+  castagna: [{d:'M12 5.5C14.5 7.5 20.5 9 20.5 14.5 20.5 18.6 16.8 20.5 12 20.5 7.2 20.5 3.5 18.6 3.5 14.5 3.5 9 9.5 7.5 12 5.5Z'}, {d:'M4.3 17.3C9.3 15.6 14.7 15.6 19.7 17.3'}, {d:'M12 5.5 11.3 3M12 5.5 12.7 3'}, {d:'M7.2 12.6C7.6 11.2 8.6 10.1 9.8 9.4'}],
+  spiga: [{d:'M12 22.5V8'}, {d:'M12 6.6C11 5.5 11 3.4 12 2.2 13 3.4 13 5.5 12 6.6Z'}, {d:'M12 9C9.5 9 7.8 7.8 7.2 5.6 9.7 5.3 11.5 6.7 12 9ZM12 9C14.5 9 16.2 7.8 16.8 5.6 14.3 5.3 12.5 6.7 12 9Z'}, {d:'M12 14C9.5 14 7.8 12.8 7.2 10.6 9.7 10.3 11.5 11.7 12 14ZM12 14C14.5 14 16.2 12.8 16.8 10.6 14.3 10.3 12.5 11.7 12 14Z'}, {d:'M12 19C9.5 19 7.8 17.8 7.2 15.6 9.7 15.3 11.5 16.7 12 19ZM12 19C14.5 19 16.2 17.8 16.8 15.6 14.3 15.3 12.5 16.7 12 19Z'}, {d:'M7.2 5.6 5.6 3.4M16.8 5.6 18.4 3.4M12 2.2V.8'}],
   germoglio: [{d:'M12 21V12'}, {d:'M12 14C8 14 5 11 5 7 9 7 12 9 12 14M12 12C12 8 14.5 5.5 19 5.5 19 9.5 16 12 12 12'}]
 };
 const ICON_RULES = [
@@ -872,6 +874,7 @@ const ICON_RULES = [
   [/fior|margherit|girasol|tulip|rose|dalia|tagete|petuni|viola/, 'fiore'],
   [/pepero|peperoncin|chili/, 'peperone'], [/melanzan/, 'melanzana'],
   [/fragol|lampon|mirtill|ribes/, 'fragola'], [/mais|granturco/, 'mais'],
+  [/castagn|marron/, 'castagna'], [/cereal|grano|frumento|orzo|segale|farro|avena|sorgo/, 'spiga'],
   [/broccol|cavolfior|romanesco/, 'broccolo'], [/cavol|verza|cappuc/, 'cavolo'],
   [/ravanell|rapa|rape|barbabiet/, 'radice']
 ];
@@ -897,7 +900,7 @@ function cropIcon(name, x, y, size) {
 
 
 /* ---------- elenco e creazione icone ---------- */
-const ICON_LABELS = { pomodoro:'Pomodoro', zucca:'Zucca', zucchina:'Zucchina', cetriolo:'Cetriolo', cipolla:'Cipolla', aglio:'Aglio', lattuga:'Insalate', carota:'Carota', patata:'Patata', fagiolino:'Fagioli', piselli:'Piselli e legumi', uva:'Vite', fiore:'Fiori', foglia:'Erbe a foglia', ramo:'Erbe a rametto', ciuffo:'Erbe a ciuffo', peperone:'Peperone', melanzana:'Melanzana', fragola:'Fragole e bacche', mais:'Mais', cavolo:'Cavolo', broccolo:'Broccoli', radice:'Radici', germoglio:'Altre colture' };
+const ICON_LABELS = { pomodoro:'Pomodoro', zucca:'Zucca', zucchina:'Zucchina', cetriolo:'Cetriolo', cipolla:'Cipolla', aglio:'Aglio', lattuga:'Insalate', carota:'Carota', patata:'Patata', fagiolino:'Fagioli', piselli:'Piselli e legumi', uva:'Vite', fiore:'Fiori', foglia:'Erbe a foglia', ramo:'Erbe a rametto', ciuffo:'Erbe a ciuffo', peperone:'Peperone', melanzana:'Melanzana', fragola:'Fragole e bacche', mais:'Mais', cavolo:'Cavolo', broccolo:'Broccoli', radice:'Radici', castagna:'Castagne', spiga:'Cereali', germoglio:'Altre colture' };
 const svgNS = 'http://www.w3.org/2000/svg';
 function iconSvg(shapes, target) {
   target.textContent = '';
@@ -919,7 +922,8 @@ const ICON_WORDS = {
   ciuffo:'erba cipollina, cipollotto, porro, porri, sedano, finocchio, asparagi, aneto, prezzemolo, erba',
   peperone:'peperone, peperoni, peperoncino, chili', melanzana:'melanzana, melanzane', fragola:'fragole, fragola, lamponi, mirtilli, ribes',
   mais:'mais, granturco', cavolo:'cavolo, cavoli, verza, cappuccio', broccolo:'broccolo, broccoli, cavolfiore, romanesco',
-  radice:'ravanello, ravanelli, rapa, rape, barbabietola', germoglio:'qualsiasi altro nome'
+  radice:'ravanello, ravanelli, rapa, rape, barbabietola',
+  castagna:'castagne, castagno, marroni', spiga:'cereali, grano, frumento, orzo, segale, farro, avena, sorgo', germoglio:'qualsiasi altro nome'
 };
 const ruleWords = key => ICON_WORDS[key] || '';
 function validShapes(v) {
