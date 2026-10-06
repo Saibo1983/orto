@@ -6,6 +6,7 @@ CONTENUTO
   manifest.webmanifest  nome e icona dell'app
   sw.js                 tiene l'app in memoria per usarla senza connessione
   icon-*.png, icon.svg  icone
+  sfondo.jpg            immagine di sfondo
   LICENZA.txt           copyright
 
 PUBBLICARE SU GITHUB PAGES (gratis)

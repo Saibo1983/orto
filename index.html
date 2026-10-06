@@ -286,6 +286,15 @@ th { letter-spacing: .03em; text-transform: none; font-size: 13px; font-weight: 
 .genwait { border-radius: 20px; }
 #iconNew, #scGen { display: none !important; }
 .copy { text-align: center; color: var(--muted); font-size: 12px; margin: 26px 0 4px; }
+
+/* ---- sfondo fotografico: immagine fissa sotto un velo del colore di fondo, così testi e strumenti restano leggibili ---- */
+:root { --veil: color-mix(in srgb, var(--bg) 80%, transparent); --veil2: color-mix(in srgb, var(--bg) 90%, transparent); }
+body { background: var(--bg); position: relative; isolation: isolate; }
+body::before, body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+body::before { background: url("sfondo.jpg") center / cover no-repeat; filter: saturate(.9); }
+body::after { background: linear-gradient(180deg, var(--veil) 0%, var(--veil2) 100%); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --veil: color-mix(in srgb, var(--bg) 86%, transparent); --veil2: color-mix(in srgb, var(--bg) 93%, transparent); } }
+:root[data-theme="dark"] { --veil: color-mix(in srgb, var(--bg) 86%, transparent); --veil2: color-mix(in srgb, var(--bg) 93%, transparent); }
 </style>
 
 <main>
