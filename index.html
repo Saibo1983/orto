@@ -145,6 +145,8 @@ button.danger { background: var(--warn); border-color: var(--warn); color: var(-
 .iconnew input[type=text] { flex: 1; min-width: 160px; font: inherit; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 4px; padding: 6px 9px; }
 .iconprev { display: flex; gap: 12px; align-items: center; margin-top: 10px; }
 .iconprev svg { width: 64px; height: 64px; color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 6px; }
+button.iconitem { font: inherit; color: var(--fg); background: var(--panel); text-align: left; cursor: pointer; width: 100%; }
+button.iconitem:hover { border-color: var(--accent); }
 .iconmsg { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
 .hn { display: block; text-transform: none; letter-spacing: 0; font-size: 11px; font-weight: 400; color: var(--fg); margin-top: 1px; white-space: nowrap; }
 .stats small { display: block; font-size: 11px; font-weight: 400; color: var(--muted); }
@@ -302,6 +304,7 @@ body::after { background: linear-gradient(180deg, var(--veil) 0%, var(--veil2) 1
     <div>
       <h1>Progetto Orto</h1>
       <div class="cfgbar">
+        <div class="row"><button id="schBtn" class="fertbtn" type="button" title="Apri l'elenco delle colture che hanno una scheda tecnica">Schede colture</button></div>
         <div class="row">
           <label for="cfgSel">Configurazione</label>
           <select id="cfgSel" aria-label="Configurazione salvata"></select>
@@ -526,6 +529,15 @@ body::after { background: linear-gradient(180deg, var(--veil) 0%, var(--veil2) 1
       <button id="fAdd" type="button">+ Aggiungi concime</button>
       <button id="fClose" type="button" class="primary">Chiudi</button>
     </div>
+  </div>
+</div>
+
+<div id="schListModal" class="overlay" hidden>
+  <div class="dialog fertdialog icondialog" role="dialog" aria-modal="true" aria-labelledby="slTitle">
+    <h2 id="slTitle">Schede delle colture</h2>
+    <p>Le colture che hanno una scheda tecnica. Tocca una coltura per aprirla.</p>
+    <div id="schList" class="iconlist"></div>
+    <div class="actions" style="margin-top:14px"><button id="slClose" type="button" class="primary">Chiudi</button></div>
   </div>
 </div>
 
@@ -1774,6 +1786,25 @@ function openScheda(name) {
 }
 const scKey = e => { if (e.key === 'Escape' && $('modal').hidden) scClose(); };
 function scClose() { $('schedaModal').hidden = true; document.removeEventListener('keydown', scKey); }
+// elenco delle sole colture con una scheda (predefinita o scritta da te); dalla scheda si torna all'elenco
+function openSchList() {
+  const m = $('schListModal'), box = $('schList'); box.textContent = '';
+  const keys = [...new Set([...Object.keys(SCHEDE), ...Object.keys(schedeUser)])].filter(k => getScheda(k));
+  keys.map(k => ({ k, s: getScheda(k) })).map(o => Object.assign(o, { nome: o.s.nome || (o.k[0].toUpperCase() + o.k.slice(1)) }))
+    .sort((a, b) => a.nome.localeCompare(b.nome, 'it')).forEach(({ k, s: sc, nome }) => {
+      const d = document.createElement('button'); d.type = 'button'; d.className = 'iconitem';
+      const ik = iconKey(k) !== 'germoglio' ? iconKey(k) : iconKey(nome), shapes = ik.startsWith('u_') ? ((customIcons.find(c => 'u_' + c.id === ik) || {}).shapes || ICONS.germoglio) : ICONS[ik];
+      const sv = document.createElementNS(svgNS, 'svg'); sv.setAttribute('viewBox', '0 0 24 24'); sv.setAttribute('aria-hidden', 'true'); iconSvg(shapes, sv);
+      const t = document.createElement('div'); const b = document.createElement('b'); b.textContent = nome; const sm = document.createElement('small');
+      sm.textContent = sc.scientifico || (sc._base ? '' : 'scheda tua'); t.append(b, sm); d.append(sv, t);
+      d.onclick = () => openScheda(k); box.appendChild(d);
+    });
+  const close = () => { m.hidden = true; document.removeEventListener('keydown', onKey); $('schBtn').focus(); };
+  const onKey = e => { if (e.key === 'Escape' && $('modal').hidden && $('schedaModal').hidden) close(); };
+  $('slClose').onclick = close; m.onclick = e => { if (e.target === m) close(); };
+  document.addEventListener('keydown', onKey); m.hidden = false; $('slClose').focus({ preventScroll: true }); m.firstElementChild.scrollTop = 0;
+}
+$('schBtn').onclick = openSchList;
 function scCal(s, key) {
   const pl = placeObj(), now = new Date(), hn = now.getMonth() * 2 + (now.getDate() > 15 ? 2 : 1);
   const rows = [['Semina', 'semina', 'sow'], ['Trapianto', 'trapianto', 'tr'], [key === 'fiori' ? 'Fioritura' : 'Raccolta', 'raccolta', 'har']];
