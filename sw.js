@@ -1,6 +1,6 @@
 // Service worker: tiene l'app in memoria per usarla anche senza connessione.
 // Quando aggiorni i file, cambia il numero della versione qui sotto.
-const VERSIONE = 'progetto-orto-v5';
+const VERSIONE = 'progetto-orto-v6';
 const FILE = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon.svg', 'sfondo.jpg', 'LICENZA.txt'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(VERSIONE).then(c => c.addAll(FILE)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(n => n !== VERSIONE).map(n => caches.delete(n)))).then(() => self.clients.claim())); });
