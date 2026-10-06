@@ -1,0 +1,29 @@
+PROGETTO ORTO - versione installabile (senza intelligenza artificiale)
+© 2026 Tob. Spin. Tutti i diritti riservati (vedi LICENZA.txt)
+
+CONTENUTO
+  index.html            l'app
+  manifest.webmanifest  nome e icona dell'app
+  sw.js                 tiene l'app in memoria per usarla senza connessione
+  icon-*.png, icon.svg  icone
+  LICENZA.txt           copyright
+
+PUBBLICARE SU GITHUB PAGES (gratis)
+  1. Crea un account su github.com.
+  2. "+" in alto a destra > New repository. Nome: orto. Public. Spunta "Add a README file". Create.
+  3. Add file > Upload files: trascina i file di questa cartella (non la cartella). Commit changes.
+  4. Settings > Pages > Source: "Deploy from a branch", branch main, cartella / (root). Save.
+  5. Dopo 1-2 minuti l'indirizzo e' https://TUOUTENTE.github.io/orto/
+
+INSTALLARE
+  Android (Chrome): menu ⋮ > Installa app
+  iPhone (Safari): Condividi > Aggiungi alla schermata Home
+  PC (Chrome/Edge): icona "Installa" nella barra dell'indirizzo
+
+AGGIORNARE
+  Carica i file nuovi (Add file > Upload files, stesso nome = sostituisce) e
+  in sw.js cambia VERSIONE (es. progetto-orto-v3).
+
+DATI
+  Restano nel browser di ogni dispositivo. Usa "Esporta backup" e "Importa backup".
+  Cancellando "dati dei siti" dal browser si perdono: fai prima un backup.
