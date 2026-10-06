@@ -287,6 +287,10 @@ th { letter-spacing: .03em; text-transform: none; font-size: 13px; font-weight: 
 .stats b { font-weight: 700; }
 .genwait { border-radius: 20px; }
 #iconNew, #scGen { display: none !important; }
+header { position: relative; }
+.schbtn { position: absolute; top: 0; right: 0; display: inline-flex; align-items: center; gap: 8px; font-size: 15px; padding: 8px 18px; background: var(--panel); box-shadow: 0 2px 10px rgba(79,143,106,.15); }
+.schbtn svg { width: 19px; height: 19px; flex: none; }
+@media (max-width: 700px) { .schbtn { font-size: 13px; padding: 4px 11px; gap: 6px; } .schbtn svg { width: 16px; height: 16px; } }
 .copy { text-align: center; color: var(--muted); font-size: 12px; margin: 26px 0 4px; }
 
 /* ---- sfondo fotografico: immagine fissa sotto un velo del colore di fondo, così testi e strumenti restano leggibili ---- */
@@ -301,10 +305,10 @@ body::after { background: linear-gradient(180deg, var(--veil) 0%, var(--veil2) 1
 
 <main>
   <header>
+    <button id="schBtn" class="fertbtn schbtn" type="button" title="Apri l'elenco delle colture che hanno una scheda tecnica"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 3.5 5V19C7 18.5 10 19 12 20.5 14 19 17 18.5 20.5 19V5C17 4.5 14 5 12 6.5ZM12 6.5V20.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Schede colture</button>
     <div>
       <h1>Progetto Orto</h1>
       <div class="cfgbar">
-        <div class="row"><button id="schBtn" class="fertbtn" type="button" title="Apri l'elenco delle colture che hanno una scheda tecnica">Schede colture</button></div>
         <div class="row">
           <label for="cfgSel">Configurazione</label>
           <select id="cfgSel" aria-label="Configurazione salvata"></select>
